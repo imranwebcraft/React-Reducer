@@ -2,16 +2,10 @@ import { useState } from "react";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
 import { initialTasks } from "./data/tasks";
+import getNextId from "./utils/getNextId";
 
 export default function App() {
 	const [tasks, setTasks] = useState(initialTasks);
-
-	const getNextId = (data) => {
-		const maxId = data.reduce((prev, current) =>
-			prev && prev.id > current.id ? prev.id : current.id
-		);
-		return maxId + 1;
-	};
 
 	// Handlers
 	const handleAddTask = (text) => {
