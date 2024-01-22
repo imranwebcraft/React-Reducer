@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
 import { initialTasks } from "./data/tasks";
+import taskReducer from "./reducers/taskReducer";
 import getNextId from "./utils/getNextId";
 
 export default function App() {
-	const [tasks, setTasks] = useState(initialTasks);
+	const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
 
 	// Handlers
 	const handleAddTask = (text) => {
