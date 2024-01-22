@@ -15,30 +15,25 @@ export default function App() {
 
 	// Handlers
 	const handleAddTask = (text) => {
-		console.log(text);
-		setTasks([...tasks, { id: getNextId(tasks), text: text, done: false }]);
+		dispatch({
+			type: "added",
+			text: text,
+			id: getNextId(tasks),
+		});
 	};
 
 	const handleChangeTask = (task) => {
-		/*
-
-        nextTask =[	{ id: 0, text: "Visit Kafka Museum", done: true }, {milce tahole jeita paicish oita de}, {mile nai tahole ager tai thak} ]
-
-        */
-
-		const nextTasks = tasks.map((t) => {
-			if (t.id === task.id) {
-				return task;
-			} else {
-				return t;
-			}
+		dispatch({
+			type: "changed",
+			task: task,
 		});
-
-		setTasks(nextTasks);
 	};
 
 	const handleDeleteTask = (taskId) => {
-		setTasks(tasks.filter((t) => t.id !== taskId));
+		dispatch({
+			type: "deleted",
+			id: taskId,
+		});
 	};
 
 	return (
