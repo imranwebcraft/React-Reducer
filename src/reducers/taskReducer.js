@@ -1,3 +1,48 @@
-const taskreducer = (tasks, action) => {};
+const taskReducer = (tasks, action) => {
+	switch (action.type) {
+		case "added": {
+			return [...tasks, { id: action.id, text: action.text, done: false }];
+		}
+		case "changed": {
+			return tasks.map((t) => {
+				if (t.id === action.task.id) {
+					return action.task;
+				} else {
+					return t;
+				}
+			});
+		}
 
-export default taskreducer;
+		case "deleted": {
+			return tasks.filter((t) => t.id !== action.id);
+		}
+
+		default: {
+			throw new Error(`No action matched with ${action.type}`);
+		}
+	}
+};
+
+export default taskReducer;
+
+/*
+action mean what happened object
+
+
+{
+type: "added",
+text: text,
+id: getNextId(tasks),
+}
+
+{
+type: "changed",
+task: task,
+}
+
+{
+type: "deleted",
+id: taskId,
+}
+
+*/
